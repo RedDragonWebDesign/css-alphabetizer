@@ -3,55 +3,61 @@
 <html lang="en-us">
 
 <head>
-	<title>Skype Copy Paste Formatter</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<title>CSS Alphabetizer</title>
 	<link rel="stylesheet" href="style.css" />
-	<script type="module" src="skype-copy-paste-formatter.js"></script>
+	<script type="module" src="css-alphabetizer.js"></script>
 </head>
 
 <body>
 	<h1>
-	Skype Copy Paste Formatter
+	CSS Alphabetizer
 	</h1>
 	
 	<p>
-	Skype copy paste is truly awful these days. The text is lacking names, has way too many line breaks, and is hard to read. This tool will format the log in the style that was more popular back in the days of AIM, MSN, and Trillian. It will put the person's name in front of every line.
+	Beautify your CSS. Sort your selectors alphabetically (which groups together #id's, .classes, and then elements), and sort your parameters alphabetically too. Parameters are nested within braces, so those aren't easy to sort with a normal A-Z sort.
 	</p>
 	
 	<p>
-	Your Username: <input type="text" id="username" value="Jeff22"><br>
+	<textarea id="css">/* comment 1 */
+/* comment 2 */
+
+body {
+	background-color: #999999;
+	margin-bottom: 0;
+}
+
+#page-container {
+	background-color: #DFDFDF;
+	width: 1150px;
+	/* is margin: auto the best way to center a display: block? */
+	margin: 12px auto 0 auto;
+}
+
+#page-container2 {
+	padding: 12px 12px 0 12px;
+}
+
+header {
+	background-color: white;
+}
+
+.category {
+	display: inline-block;
+	padding: 18px 25px;
+	font-family: sans-serif;
+}
+
+.category:hover {
+	background-color: #059BD8;
+}</textarea>
 	</p>
 	
 	<p>
-	<textarea id="log">I'm getting ready to consider 2k (not 4k) for a main monitor 
-
-But, I don't want to spend too much
-
-7:27 PM
-Have you tried out 2k? Is it noticeably better?
-
-Bob44, 7:27 PM
-I have not.
-
-But its gonna be awhile before 4k
-
-Cause gaming still not there
-
-7:28 PM
-Yeah. Gpus are getting good, but increasing res and hz brings them back down to mediocre
-
-Bob44, 7:28 PM
-Yeah, but 4k can't even have 144hz yet
-
-And it stresses out the VC more than 1080p or 2k</textarea>
+	<button id="alphabetize">Alphabetize</button>
 	</p>
 	
 	<p>
-	<button id="format">Format Skype Log</button>
-	</p>
-	
-	<p>
-	Want to report a bug or request a feature? <a href="https://github.com/RedDragonWebDesign/skype-copy-paste-formatter/issues">Create an issue</a> on our GitHub.
+	Want to report a bug or request a feature? <a href="https://github.com/RedDragonWebDesign/css-alphabetizer/issues">Create an issue</a> on our GitHub.
 	</p>
 </body>
 
