@@ -40,11 +40,12 @@ class CSSAlphabetizer {
 		return lines;
 	}
 	
+	/** Makes an array of arrays. [whitespace, trimmed, blockNum, isParameter]. Having unique block numbers will be important later, when we are alphabetizing things. */
+	// TODO: Refactor from array to associative array? Easier to add/delete fields later without messing up other parts of the code.
 	_makeLinesArray(s) {
 		let lines = s.split("\n");
 		let isBlock = false;
 		let blockNumCounter = 0;
-		// Make an array of arrays. [whitespace, trimmed, blockNum, isParameter]
 		for ( let key in lines ) {
 			let value = lines[key];
 			if ( value.includes("{") ) {
@@ -52,11 +53,12 @@ class CSSAlphabetizer {
 				blockNumCounter++;
 			}
 			let blockNum = isBlock ? blockNumCounter : 0;
+			let isParameter = Boolean(blockNum && value.search(/^((?!\{|\}).)*$/) !== -1);
 			lines[key] = [
 				value,
 				value.trim(),
 				blockNum,
-				//isParameter
+				isParameter,
 			];
 			if ( value.includes("}") ) {
 				isBlock = false;
