@@ -3,14 +3,11 @@
 
 "use strict";
 
-// TODO: Experiment with TypeScript
-
 class CSSAlphabetizer {
 	alphabetize(s) {
 		// TODO: this._validate();
 		// TODO: this._beautify(); using regex and replace of { ; }
 		let lines, blocks;
-		// TODO: Can probably combine 1 or 2 of the below 3 loops. Reusing same loop = faster;
 		lines = this._makeLinesArray(s);
 		blocks = this._sortSelectors(lines);
 		blocks = this._sortParameters(blocks);
@@ -33,7 +30,7 @@ class CSSAlphabetizer {
 		// lines => string
 		let s = "";
 		for ( let line of lines ) {
-			s += line[0] + "\n";
+			s += line[1] + "\n";
 		}
 		s = s.slice(0, s.length-1);
 		return s;
@@ -50,8 +47,8 @@ class CSSAlphabetizer {
 		for ( let i = 0; i < len; i++ ) {
 			let line = lines[i];
 			let lineNum = line[2];
-			if ( ! parameterTrimmed && line[1].search("{") !== -1 ) {
-				parameterTrimmed = line[1];
+			if ( ! parameterTrimmed && line[0].search("{") !== -1 ) {
+				parameterTrimmed = line[0];
 			}
 			if ( lineNum !== lineNumTracker ) {
 				lineNumTracker++;
@@ -73,19 +70,31 @@ class CSSAlphabetizer {
 	}
 	
 	_sortParameters(blocks) {
-		
-		
-		
-		
+		for ( let key in blocks ) {
+			let lines = blocks[key][1];
+			let lineBuffer = [];
+			let sortBuffer = [];
+			for ( let line of lines ) {
+				let isParameter = line[3];
+				if ( isParameter ) {
+					sortBuffer.push(line);
+				} else {
+					if ( sortBuffer ) {
+						sortBuffer = sortBuffer.sort();
+						lineBuffer = lineBuffer.concat(sortBuffer);
+					}
+					lineBuffer.push(line);
+				}
+			}
+			blocks[key][1] = lineBuffer;
+		}
 		console.log(blocks);
-		
-		
 		return blocks;
 	}
 	
-	/** Makes an array of arrays. [whitespace, trimmed, blockNum, isParameter]. Having unique block numbers will be important later, when we are alphabetizing things. */
-	// TODO: Refactor from array to associative array? Easier to add/delete fields later without messing up other parts of the code.
+	/** Makes an array of arrays. [trimmed, notTrimmed, blockNum, isParameter]. Having unique block numbers will be important later, when we are alphabetizing things. */
 	_makeLinesArray(s) {
+		// TODO: refactor to use associative array, more readable code, and less likely to have bugs if fields are added/changed/deleted later
 		let lines = s.split("\n");
 		let blockNum = 0;
 		let isParameter = false;
@@ -95,8 +104,9 @@ class CSSAlphabetizer {
 				isParameter = false;
 			}
 			lines[key] = [
-				value,
+				// Trimmed line in first spot. Important for sorting.
 				value.trim(),
+				value,
 				blockNum,
 				isParameter,
 			];
