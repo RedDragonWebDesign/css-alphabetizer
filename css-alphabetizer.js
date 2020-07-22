@@ -13,12 +13,16 @@ class CSSAlphabetizer {
 		lines = this._makeLinesArray(s);
 		blocks = this._sortSelectors(lines);
 		blocks = this._sortParameters(blocks);
-		// TODO: blocks = this._addBlankLineBetweenBlocks(blocks);
 		
 		s = this._makeString(blocks);
+		s = this._addBlankLineBetweenBlocks(s);
 		s = s.trim();
 		
 		return s;
+	}
+	
+	_addBlankLineBetweenBlocks(s) {
+		return s.replace(/}\n([^\n])/, "}\n\n$1");
 	}
 	
 	_makeString(blocks) {
@@ -88,6 +92,7 @@ class CSSAlphabetizer {
 			
 			for ( let line of lines ) {
 				let isParameter = line[3];
+				
 				if ( isParameter ) {
 					sortBuffer.push(line);
 				} else {
