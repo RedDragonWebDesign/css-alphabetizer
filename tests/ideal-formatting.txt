@@ -1,0 +1,151 @@
+body {
+	background-color: #999999;
+	margin-bottom: 0;
+}
+
+#page-container {
+	background-color: #DFDFDF;
+	width: 1150px;
+	margin: 12px auto 0 auto;
+}
+
+#page-container2 {
+	padding: 12px 12px 0 12px;
+}
+
+header {
+	background-color: white;
+}
+
+nav {
+	background-color: black;
+	color: white;
+}
+
+article {
+	background-color: #F5F5F5;
+	color: #666666;
+}
+
+#site-name-container {
+	text-align: center;
+	width: 360px;
+	padding: 20px 10px 20px 10px;
+}
+
+#site-name {
+	color: #059BD8;
+	font-size: 2.5rem;
+}
+
+#tagline {
+	color: #6E6C6A;
+	font-family: sans-serif;
+}
+
+.category {
+	display: inline-block;
+	padding: 18px 25px;
+	font-family: sans-serif;
+}
+
+.category:hover {
+	background-color: #059BD8;
+}
+
+#hero-image {
+	width: 580px;
+}
+
+#mid-page {
+	background-color: #F5F5F5;
+	display: flex;
+}
+
+article {
+	padding: 20px 20px 1px 20px;
+	width: 670px;
+}
+
+aside {
+	padding: 20px 0 0 40px;
+	background-color: #F5F5F5;
+	color: #666666;
+	width: 360px;
+}
+
+h1 {
+	border-bottom: 1px solid #666666;
+	font-weight: normal;
+}
+
+p {
+	font-family: sans-serif;
+}
+
+h2 {
+	font-weight: bold;
+	font-style: italic;
+	text-decoration: underline;
+	font-size: 1rem;
+	font-family: sans-serif;
+}
+
+aside > h1 {
+	border: 0;
+	border-bottom: 1px solid #666666;
+	padding-bottom: 15px;
+	margin-bottom: 0;
+}
+
+.sidebar-event {
+	border-bottom: 1px solid #666666;
+	padding: 15px 0;
+	display: flex;
+}
+
+.event-logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+	border: 1px solid #666666;
+	width: 130px;
+	height: 130px;
+}
+
+.event-logo > img {
+	width: 90%;
+	display: block;
+}
+
+a {
+	color: #059BD8;
+	font-family: sans-serif;
+}
+
+a:hover {
+	background-color: darkorange;
+}
+
+.event-description {
+	width: 200px;
+	margin-left: 10px;
+}
+
+.event-description > p {
+	margin: 0;
+}
+
+.event-description > a {
+	font-weight: bold;
+}
+
+footer {
+	background-color: #3D3D3D;
+	color: white;
+	font-family: sans-serif;
+	padding: 12px 25px;
+	display: flex;
+	justify-content: space-between;
+}

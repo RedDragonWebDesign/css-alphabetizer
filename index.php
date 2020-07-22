@@ -18,10 +18,7 @@
 	</p>
 	
 	<p>
-	<textarea id="css">/* comment 1 */
-/* comment 2 */
-
-body {
+	<textarea id="css">body {
 	background-color: #999999;
 	margin-bottom: 0;
 }
@@ -29,7 +26,6 @@ body {
 #page-container {
 	background-color: #DFDFDF;
 	width: 1150px;
-	/* is margin: auto the best way to center a display: block? */
 	margin: 12px auto 0 auto;
 }
 
