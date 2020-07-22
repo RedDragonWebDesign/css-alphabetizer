@@ -12,16 +12,32 @@ class CSSAlphabetizer {
 		lines = this._makeLinesArray(s);
 		lines = this._sortSelectors(lines);
 		lines = this._sortParameters(lines);
+		s = this._makeString(lines);
 		
 		console.log(lines);
+		
+		return s;
+	}
+	
+	_makeString(lines) {
+		let s = "";
+		for ( let line of lines ) {
+			s += line[0] + "\n";
+		}
+		s = s.slice(0, s.length-1);
+		return s;
 	}
 	
 	_sortSelectors(lines) {
 		
+		
+		return lines;
 	}
 	
 	_sortParameters(lines) {
 		
+		
+		return lines;
 	}
 	
 	_makeLinesArray(s) {
