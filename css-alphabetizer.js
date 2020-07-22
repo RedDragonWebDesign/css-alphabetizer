@@ -3,23 +3,34 @@
 
 "use strict";
 
+// TODO: Experiment with TypeScript
+
 class CSSAlphabetizer {
 	alphabetize(s) {
 		// TODO: this._validate();
-		// TODO: this._beautify(); using regex and replace of { , }
-		
-		let lines;
+		// TODO: this._beautify(); using regex and replace of { ; }
+		let lines, blocks;
+		// TODO: Can probably combine 1 or 2 of the below 3 loops. Reusing same loop = faster;
 		lines = this._makeLinesArray(s);
-		lines = this._sortSelectors(lines);
-		lines = this._sortParameters(lines);
-		s = this._makeString(lines);
-		
-		console.log(lines);
-		
+		blocks = this._sortSelectors(lines);
+		blocks = this._sortParameters(blocks);
+		// TODO: blocks = this._addBlankLineBetweenBlocks(blocks);
+		s = this._makeString(blocks);
+		s = s.trim();
 		return s;
 	}
 	
-	_makeString(lines) {
+	_makeString(blocks) {
+		// blocks => lines
+		let lines = [];
+		for ( let block of blocks ) {
+			let lines2 = block[1];
+			for ( let line of lines2 ) {
+				lines.push(line);
+			}
+		}
+		
+		// lines => string
 		let s = "";
 		for ( let line of lines ) {
 			s += line[0] + "\n";
@@ -29,41 +40,75 @@ class CSSAlphabetizer {
 	}
 	
 	_sortSelectors(lines) {
-		
-		
-		return lines;
+		/** [parameterTrimmed, [line, line, line, line]] */
+		let blocks = [];
+		/** [line, line, line, line] **/
+		let buffer = [];
+		let lineNumTracker = 0;
+		let parameterTrimmed = "";
+		let len = lines.length;
+		for ( let i = 0; i < len; i++ ) {
+			let line = lines[i];
+			let lineNum = line[2];
+			if ( ! parameterTrimmed && line[1].search("{") !== -1 ) {
+				parameterTrimmed = line[1];
+			}
+			if ( lineNum !== lineNumTracker ) {
+				lineNumTracker++;
+				blocks.push([parameterTrimmed, buffer]);
+				buffer = [];
+				parameterTrimmed = "";
+			}
+			buffer.push(line);
+			// Last line. Finish the block.
+			if ( i === len-1 ) {
+				lineNumTracker++;
+				blocks.push([parameterTrimmed, buffer]);
+				buffer = [];
+				parameterTrimmed = "";
+			}
+		}
+		blocks = blocks.sort();
+		return blocks;
 	}
 	
-	_sortParameters(lines) {
+	_sortParameters(blocks) {
 		
 		
-		return lines;
+		
+		
+		console.log(blocks);
+		
+		
+		return blocks;
 	}
 	
 	/** Makes an array of arrays. [whitespace, trimmed, blockNum, isParameter]. Having unique block numbers will be important later, when we are alphabetizing things. */
 	// TODO: Refactor from array to associative array? Easier to add/delete fields later without messing up other parts of the code.
 	_makeLinesArray(s) {
 		let lines = s.split("\n");
-		let isBlock = false;
-		let blockNumCounter = 0;
+		let blockNum = 0;
+		let isParameter = false;
 		for ( let key in lines ) {
 			let value = lines[key];
-			if ( value.includes("{") ) {
-				isBlock = true;
-				blockNumCounter++;
+			if ( value.includes("}") ) {
+				isParameter = false;
 			}
-			let blockNum = isBlock ? blockNumCounter : 0;
-			let isParameter = Boolean(blockNum && value.search(/^((?!\{|\}).)*$/) !== -1);
 			lines[key] = [
 				value,
 				value.trim(),
 				blockNum,
 				isParameter,
 			];
+			// When } is found, increment the block number. This keeps comment lines above grouped with that block.
 			if ( value.includes("}") ) {
-				isBlock = false;
+				blockNum++;
+			}
+			if ( value.includes("{") ) {
+				isParameter = true;
 			}
 		}
+		console.log(lines);
 		return lines;
 	}
 }
@@ -72,7 +117,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
 	let css = document.getElementById('css');
 	let alphabetize = document.getElementById('alphabetize');
 	
-	// TODO: Test combo box.
+	// TODO: Combo box that loads tests.
 	
 	alphabetize.addEventListener('click', function(e) {
 		let alphabetizer = new CSSAlphabetizer();
