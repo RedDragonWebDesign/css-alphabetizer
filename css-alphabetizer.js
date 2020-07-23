@@ -45,9 +45,9 @@ class CSSAlphabetizer {
 	}
 	
 	_sortSelectors(lines) {
-		/** [parameterTrimmed, [line, line, line, line]] */
+		/** [parameterTrimmed, [line, line, ...line]] */
 		let blocks = [];
-		/** [line, line, line, line] **/
+		/** [line, line, ...line] **/
 		let buffer = [];
 		let lineNumTracker = 0;
 		let parameterTrimmed = "";
@@ -57,7 +57,7 @@ class CSSAlphabetizer {
 			let line = lines[i];
 			let lineNum = line[2];
 			
-			if ( ! parameterTrimmed && line[0].search("{") !== -1 ) {
+			if ( ! parameterTrimmed && line[0].includes("{") ) {
 				parameterTrimmed = line[0];
 			}
 			
@@ -111,9 +111,9 @@ class CSSAlphabetizer {
 		return blocks;
 	}
 	
-	/** Makes an array of arrays. [trimmed, notTrimmed, blockNum, isParameter]. Having unique block numbers will be important later, when we are alphabetizing things. */
+	/** Makes an array of lines. Outer level [line, line, ...line]. Inner level [string trimmed, string notTrimmed, int blockNum, bool isParameter]. Having unique block numbers will be important later, when we are alphabetizing things. */
 	_makeLinesArray(s) {
-		// TODO: refactor to use associative array, more readable code, and less likely to have bugs if fields are added/changed/deleted later
+		// TODO: refactor to use associative array, more readable code, and less likely to have bugs if later we want to add/change/delete fields
 		let lines = s.split("\n");
 		let blockNum = 0;
 		let isParameter = false;
@@ -133,7 +133,7 @@ class CSSAlphabetizer {
 				isParameter,
 			];
 			
-			// When } is found, increment the block number. This keeps comment lines above grouped with that block.
+			// When } is found, increment the block number. This keeps comment lines above block grouped with that block.
 			if ( value.includes("}") ) {
 				blockNum++;
 			}
