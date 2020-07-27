@@ -28,13 +28,7 @@ class CSSAlphabetizer {
 	
 	_makeString(blocks) {
 		// blocks => lines
-		let lines = [];
-		for (let block of blocks) {
-			let lines2 = block[1];
-			for (let line of lines2) {
-				lines.push(line);
-			}
-		}
+		const lines = blocks.map(block => block[1]).flat(); 
 		
 		// lines => string
 		return lines.map(line=>line[1]).join("\n");
