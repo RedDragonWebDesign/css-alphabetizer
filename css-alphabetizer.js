@@ -22,7 +22,8 @@ class CSSAlphabetizer {
 	}
 	
 	_addBlankLineBetweenBlocks(s) {
-		return s.replace(/}\n([^\n])/, "}\n\n$1");
+		// Replace } enter with } enter enter
+		return s.replace(/}\r?\n(?=[^\r\n])/, "}\n\n");
 	}
 	
 	_makeString(blocks) {
