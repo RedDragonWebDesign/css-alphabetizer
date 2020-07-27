@@ -4,7 +4,8 @@
 "use strict";
 
 /*
-CSS - This whole thing is a rule: 
+CSS Terminology
+This whole thing is a rule:
 
 selector {
 	declaration;
@@ -31,7 +32,7 @@ class CSSAlphabetizer {
 	}
 	
 	_addBlankLineBetweenRules(s) {
-		// Replace } enter with } enter enter
+		// Replace } enter text with } enter enter text
 		return s.replace(/}\r?\n(?=[^\r\n])/, "}\n\n");
 	}
 	
