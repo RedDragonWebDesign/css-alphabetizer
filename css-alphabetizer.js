@@ -37,12 +37,7 @@ class CSSAlphabetizer {
 		}
 		
 		// lines => string
-		let s = "";
-		for (let line of lines) {
-			s += line[1] + "\n";
-		}
-		s = s.slice(0, s.length-1);
-		return s;
+		return lines.map(line=>line[1]).join("\n");
 	}
 	
 	_sortSelectors(lines) {
