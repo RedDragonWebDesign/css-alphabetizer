@@ -6,6 +6,7 @@
 	<title>CSS Alphabetizer</title>
 	<link rel="stylesheet" href="style.css" />
 	<script type="module" src="css-alphabetizer.js"></script>
+	<meta charset="utf-8">
 </head>
 
 <body>
