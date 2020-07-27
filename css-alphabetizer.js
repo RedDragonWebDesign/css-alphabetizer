@@ -86,7 +86,8 @@ class CSSAlphabetizer {
 				if (isParameter) {
 					sortBuffer.push(line);
 				} else {
-					if (sortBuffer) {
+					// If last line
+					if (sortBuffer.length) {
 						sortBuffer = sortBuffer.sort();
 						lineBuffer = lineBuffer.concat(sortBuffer);
 					}
