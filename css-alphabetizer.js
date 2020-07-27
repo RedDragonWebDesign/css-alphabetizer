@@ -28,16 +28,16 @@ class CSSAlphabetizer {
 	_makeString(blocks) {
 		// blocks => lines
 		let lines = [];
-		for ( let block of blocks ) {
+		for (let block of blocks) {
 			let lines2 = block[1];
-			for ( let line of lines2 ) {
+			for (let line of lines2) {
 				lines.push(line);
 			}
 		}
 		
 		// lines => string
 		let s = "";
-		for ( let line of lines ) {
+		for (let line of lines) {
 			s += line[1] + "\n";
 		}
 		s = s.slice(0, s.length-1);
@@ -53,15 +53,15 @@ class CSSAlphabetizer {
 		let parameterTrimmed = "";
 		let len = lines.length;
 		
-		for ( let i = 0; i < len; i++ ) {
+		for (let i = 0; i < len; i++) {
 			let line = lines[i];
 			let lineNum = line[2];
 			
-			if ( ! parameterTrimmed && line[0].includes("{") ) {
+			if (! parameterTrimmed && line[0].includes("{")) {
 				parameterTrimmed = line[0];
 			}
 			
-			if ( lineNum !== lineNumTracker ) {
+			if (lineNum !== lineNumTracker) {
 				lineNumTracker++;
 				blocks.push([parameterTrimmed, buffer]);
 				buffer = [];
@@ -71,7 +71,7 @@ class CSSAlphabetizer {
 			buffer.push(line);
 			
 			// Last line. Finish the block.
-			if ( i === len-1 ) {
+			if (i === len-1) {
 				lineNumTracker++;
 				blocks.push([parameterTrimmed, buffer]);
 				buffer = [];
@@ -85,18 +85,18 @@ class CSSAlphabetizer {
 	}
 	
 	_sortParameters(blocks) {
-		for ( let key in blocks ) {
+		for (let key in blocks) {
 			let lines = blocks[key][1];
 			let lineBuffer = [];
 			let sortBuffer = [];
 			
-			for ( let line of lines ) {
+			for (let line of lines) {
 				let isParameter = line[3];
 				
-				if ( isParameter ) {
+				if (isParameter) {
 					sortBuffer.push(line);
 				} else {
-					if ( sortBuffer ) {
+					if (sortBuffer) {
 						sortBuffer = sortBuffer.sort();
 						lineBuffer = lineBuffer.concat(sortBuffer);
 					}
@@ -118,10 +118,10 @@ class CSSAlphabetizer {
 		let blockNum = 0;
 		let isParameter = false;
 		
-		for ( let key in lines ) {
+		for (let key in lines) {
 			let value = lines[key];
 			
-			if ( value.includes("}") ) {
+			if (value.includes("}")) {
 				isParameter = false;
 			}
 			
@@ -134,11 +134,11 @@ class CSSAlphabetizer {
 			];
 			
 			// When } is found, increment the block number. This keeps comment lines above block grouped with that block.
-			if ( value.includes("}") ) {
+			if (value.includes("}")) {
 				blockNum++;
 			}
 			
-			if ( value.includes("{") ) {
+			if (value.includes("{")) {
 				isParameter = true;
 			}
 		}
