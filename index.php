@@ -3,10 +3,10 @@
 <html lang="en-us">
 
 <head>
+	<meta charset="utf-8">
 	<title>CSS Alphabetizer</title>
 	<link rel="stylesheet" href="style.css" />
 	<script type="module" src="css-alphabetizer.js"></script>
-	<meta charset="utf-8">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 	</h1>
 	
 	<p>
-	Beautify your CSS. Sort your selectors alphabetically (which groups together #id's, .classes, and then elements), and sort your parameters alphabetically too. Parameters are nested within braces, so those aren't easy to sort with a normal A-Z sort.
+	Beautify your CSS. Sort your selectors alphabetically (which groups together #id's, .classes, and elements), and sort your declarations alphabetically too. Declarations are nested within braces, so those aren't easy to sort with a normal A-Z sort.
 	</p>
 	
 	<p>
