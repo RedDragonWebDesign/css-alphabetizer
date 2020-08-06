@@ -15,20 +15,24 @@ selector {
 
 class CSSAlphabetizer {
 	alphabetize(s) {
-		let lines, rules;
-		
-		// TODO: this._validate();
-		// TODO: this._beautify(); using regex and replace of { ; }
-		
-		lines = this._makeLinesArray(s);
-		rules = this._sortSelectors(lines);
-		rules = this._sortDeclarations(rules);
-		
-		s = this._makeString(rules);
-		s = this._addBlankLineBetweenRules(s);
-		s = s.trim();
-		
-		return s;
+		try {
+			let lines, rules;
+			
+			// TODO: this._validate();
+			// TODO: this._beautify(); using regex and replace of { ; }
+			
+			lines = this._makeLinesArray(s);
+			rules = this._sortSelectors(lines);
+			rules = this._sortDeclarations(rules);
+			
+			s = this._makeString(rules);
+			s = this._addBlankLineBetweenRules(s);
+			s = s.trim();
+			
+			return s;
+		} catch {
+			return 'Error';
+		}
 	}
 	
 	_addBlankLineBetweenRules(s) {
