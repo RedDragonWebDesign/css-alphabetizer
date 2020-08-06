@@ -1,0 +1,6 @@
+#page-container {
+	background-color: #DFDFDF;
+	width: 1150px;
+	color: white;
+	padding: 12px 12px 0 12px; /* comment same line & after parameter */
+}

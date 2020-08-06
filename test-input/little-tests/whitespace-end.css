@@ -1,0 +1,11 @@
+body {
+	background-color: #999999;
+	margin-bottom: 0;
+}
+
+#page-container {
+	background-color: #DFDFDF;
+	width: 1150px;
+	margin: 12px auto 0 auto;
+}
+

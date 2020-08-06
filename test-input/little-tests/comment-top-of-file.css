@@ -1,0 +1,13 @@
+/* comment at beginning of file */
+
+body {
+	background-color: #999999;
+	margin-bottom: 0;
+}
+
+#page-container {
+	background-color: #DFDFDF;
+	width: 1150px;
+	color: white;
+	padding: 12px 12px 0 12px;
+}
